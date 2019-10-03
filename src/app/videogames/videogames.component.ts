@@ -34,8 +34,13 @@ import { Videogames } from '../Videogames';
 export class VideogamesComponent implements OnInit {
 
   itemCount : number = 1
-  btnTxt : string = "Agregar un videogame"
-  goalText : string = "Nombre..."
+  btnText : string = "Agregar un videogame"
+  goalText : string = ""
+  goalDeveloper : string = ""
+  goalGamesystem : string = ""
+  goalGenre : string = ""
+  goalYear : number = 2019 
+
   goals = [];
 
   constructor(private _data: DataService) { }
@@ -57,16 +62,24 @@ export class VideogamesComponent implements OnInit {
   addItem() {
     //this.goals.push(this.goalText);
     
-    //this.itemCount = this.goals.length;
+    this.itemCount = this.goals.length;
     //this._data.changeGoal(this.goals);
     var mydata = new Videogames;
      
     mydata.name = this.goalText;
+    mydata.developer = this.goalDeveloper;
+    mydata.gamesystem = this.goalGamesystem;
+    mydata.genre = this.goalGamesystem;
+    mydata.year = this.goalYear;
 
     return this._data.postVideogames(mydata)
      .subscribe((data: any) => {
       console.log("pos videogames :" + data );
       this.goalText = '';
+      this.goalDeveloper = '';
+      this.goalGamesystem = '';
+      this.goalGenre = '';
+      this.goalYear = 2019;
       this.getVideogames();
   
       //this.goals = data;

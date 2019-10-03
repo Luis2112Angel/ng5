@@ -35,13 +35,14 @@ export class HomeComponent implements OnInit {
   
   itemCount : number = 1
   btnTxt : string = "Agregar un gamesystem"
-  goalText : string = "Nombre..."
+  goalText : string = ""
+  goalDescription : string = ""
   goals = [];
 
 constructor(private _data: DataService) { }
 
 ngOnInit() {
-  //this.itemCount = this.goals.length;
+  this.itemCount = this.goals.length;
   //this._data.goal.subscribe(res => this.goals = res);
   //this._data.changeGoal(this.goals);
   this.getEntidades();
@@ -60,17 +61,18 @@ getEntidades() {
 addItem() {
   //this.goals.push(this.goalText);
   
-  //this.itemCount = this.goals.length;
+  this.itemCount = this.goals.length;
   //this._data.changeGoal(this.goals);
   var mydata = new Entidades;
    
   mydata.name = this.goalText;
-  mydata.description = this.goalText;
+  mydata.description = this.goalDescription;
 
   return this._data.postEntidades(mydata)
    .subscribe((data: any) => {
     console.log("pos entidades :" + data );
     this.goalText = '';
+    this.goalDescription = '';
     this.getEntidades();
 
     //this.goals = data;
@@ -80,7 +82,7 @@ addItem() {
 
 removeItem(i) {
   //this.goals.splice(i, 1);
-//  this.itemCount = this.goals.length;
+    this.itemCount = this.goals.length;
   //this._data.changeGoal(this.goals);
 return this._data.deleteEntidades(i)
   .subscribe((data: any) => {
