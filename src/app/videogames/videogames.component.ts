@@ -39,7 +39,7 @@ export class VideogamesComponent implements OnInit {
   goalDeveloper : string = ""
   goalGamesystem : string = ""
   goalGenre : string = ""
-  goalYear : number = 2019 
+  goalYear : number
 
   goals = [];
 
@@ -79,7 +79,7 @@ export class VideogamesComponent implements OnInit {
       this.goalDeveloper = '';
       this.goalGamesystem = '';
       this.goalGenre = '';
-      this.goalYear = 2019;
+      this.goalYear = null;
       this.getVideogames();
   
       //this.goals = data;

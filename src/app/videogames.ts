@@ -5,5 +5,5 @@ export class Videogames {
     developer:string;
     gamesystem:string;
     genre:string;
-    year:number;
+    year: number;
 }
