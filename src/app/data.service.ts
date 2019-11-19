@@ -8,6 +8,7 @@ import { Videogames } from './videogames';
 
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { Pokemones } from 'src/pokemones';
 //import { _throw as throwError } from 'rxjs/observable/throw';
 
 
@@ -17,7 +18,7 @@ export class DataService {
 // Define API
 //apiURL = 'https://upheld-castle-251021.appspot.com';
 //apiURL = 'http://localhost:10010';
-apiURL = 'https://advance-engine-250015.appspot.com';
+apiURL = 'http://total-name-256003.appspot.com';
 
  constructor(private http: HttpClient) { }
 
@@ -77,6 +78,32 @@ postVideogames(body) {
 
 deleteVideogames(id) {
   return this.http.delete(this.apiURL + '/videogames/' + id, this.httpOptions)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)  
+  )
+}
+
+getPokemones(): Observable<Pokemones> {
+  return this.http.get<Pokemones>(this.apiURL + '/pokemons')
+  .pipe(
+    retry(1),
+    catchError(this.handleError)
+  )
+}
+
+
+postPokemones(body) {
+  return this.http.post(this.apiURL + '/pokemons', body, this.httpOptions)
+  .pipe(
+    retry(1),
+    catchError(this.handleError)  
+  )
+}
+
+
+deletePokemones(id) {
+  return this.http.delete(this.apiURL + '/pokemons/' + id, this.httpOptions)
   .pipe(
     retry(1),
     catchError(this.handleError)  
